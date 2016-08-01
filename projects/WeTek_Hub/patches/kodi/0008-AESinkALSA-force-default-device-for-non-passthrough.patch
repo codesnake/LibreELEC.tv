@@ -1,0 +1,27 @@
+From 57f5cad32e4827ff7cedc4a76e2590d2a0c7d5c8 Mon Sep 17 00:00:00 2001
+From: Jonas Karlman <jonas@kwiboo.se>
+Date: Fri, 7 Oct 2016 13:42:10 +0200
+Subject: [PATCH 8/8] AESinkALSA: force default device for non-passthrough
+
+---
+ xbmc/cores/AudioEngine/Sinks/AESinkALSA.cpp |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/xbmc/cores/AudioEngine/Sinks/AESinkALSA.cpp b/xbmc/cores/AudioEngine/Sinks/AESinkALSA.cpp
+index e22db7a..86f759b 100644
+--- a/xbmc/cores/AudioEngine/Sinks/AESinkALSA.cpp
++++ b/xbmc/cores/AudioEngine/Sinks/AESinkALSA.cpp
+@@ -524,9 +524,8 @@ bool CAESinkALSA::Initialize(AEAudioFormat &format, std::string &device)
+     m_passthrough   = false;
+   }
+ #if defined(HAS_LIBAMCODEC)
+-  if (aml_present())
++  if (!m_passthrough && device.find("hdmi:CARD=AMLM8AUDIO") != std::string::npos)
+   {
+-    aml_set_audio_passthrough(m_passthrough);
+     device = "default";
+   }
+ #endif
+-- 
+1.7.10.4
+
