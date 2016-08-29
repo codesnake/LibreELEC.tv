@@ -1,0 +1,33 @@
+From 975cb7e337db3d6f9ced611291180ad1a814bc7e Mon Sep 17 00:00:00 2001
+From: Alex Deryskyba <alex@codesnake.com>
+Date: Fri, 11 Dec 2015 23:44:42 +0100
+Subject: [PATCH 6/9] [keyboard] Make Escape key execute back action
+
+---
+ system/keymaps/keyboard.xml |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/system/keymaps/keyboard.xml b/system/keymaps/keyboard.xml
+index 9833cff..d28e341 100644
+--- a/system/keymaps/keyboard.xml
++++ b/system/keymaps/keyboard.xml
+@@ -50,7 +50,7 @@
+       <m>Menu</m>
+       <n mod="ctrl">ActivateWindow(PlayerControls)</n>
+       <s>ActivateWindow(shutdownmenu)</s>
+-      <escape>PreviousMenu</escape>
++      <escape>Back</escape>
+       <i>Info</i>
+       <menu>ContextMenu</menu>
+       <menu mod="longpress">Menu</menu>
+@@ -187,6 +187,7 @@
+       <backspace>Backspace</backspace>
+       <browser_back>Backspace</browser_back>
+       <browser_back mod="longpress">PreviousMenu</browser_back>
++      <escape>PreviousMenu</escape>
+     </keyboard>
+   </VirtualKeyboard>
+   <MyTVChannels>
+-- 
+1.7.10.4
+
