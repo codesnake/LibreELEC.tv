@@ -5,6 +5,4 @@
   <samba>
     <clienttimeout>30</clienttimeout>
   </samba>
-
-  <loglevel>2</loglevel>
 </advancedsettings>
