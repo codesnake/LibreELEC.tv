@@ -6,9 +6,5 @@
     <clienttimeout>30</clienttimeout>
   </samba>
 
-  <network>
-    <readbufferfactor>4.0</readbufferfactor>
-  </network>
-
   <loglevel>2</loglevel>
 </advancedsettings>
