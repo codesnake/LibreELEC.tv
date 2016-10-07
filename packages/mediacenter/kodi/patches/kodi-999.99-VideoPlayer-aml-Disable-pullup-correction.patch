@@ -1,0 +1,26 @@
+From 882b35f77b1a7059c96fc2b0bcb75e5c3f5b6130 Mon Sep 17 00:00:00 2001
+From: Alex Deryskyba <alex@codesnake.com>
+Date: Fri, 7 Oct 2016 17:23:11 +0200
+Subject: [PATCH] VideoPlayer: aml: Disable pullup correction when using
+ Amlogic decoder - it is also bypass
+
+---
+ xbmc/cores/VideoPlayer/VideoPlayerVideo.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xbmc/cores/VideoPlayer/VideoPlayerVideo.cpp b/xbmc/cores/VideoPlayer/VideoPlayerVideo.cpp
+index 8651327..b1444cd 100644
+--- a/xbmc/cores/VideoPlayer/VideoPlayerVideo.cpp
++++ b/xbmc/cores/VideoPlayer/VideoPlayerVideo.cpp
+@@ -800,7 +800,7 @@ int CVideoPlayerVideo::OutputPicture(const DVDVideoPicture* src, double pts)
+   int result = 0;
+ 
+   //correct any pattern in the timestamps
+-  if (picture.format != RENDER_FMT_BYPASS)
++  if (picture.format != RENDER_FMT_BYPASS && picture.format != RENDER_FMT_AML)
+   {
+     m_pullupCorrection.Add(pts);
+     pts += m_pullupCorrection.GetCorrection();
+-- 
+1.7.10.4
+
