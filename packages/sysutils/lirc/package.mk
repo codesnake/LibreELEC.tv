@@ -35,7 +35,10 @@ PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_forkpty=no \
                            ac_cv_prog_HAVE_PYTHON3=no \
                            --localstatedir=/ \
                            --with-gnu-ld \
-                           --without-x"
+                           --without-x \
+                           HAVE_UINPUT=no \
+                           HAVE_PYMOD_YAML=no \
+                           HAVE_WORKING_POLL=yes"
 
 post_makeinstall_target() {
   rm -rf $INSTALL/usr/lib/systemd
