@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="docker"
-PKG_VERSION="1.13.0"
-PKG_REV="112"
+PKG_VERSION="1.13.1"
+PKG_REV="114"
 PKG_ARCH="any"
 PKG_ADDON_PROJECTS="Generic RPi RPi2 imx6 WeTek_Hub WeTek_Play_2"
 PKG_LICENSE="ASL"
@@ -41,7 +41,8 @@ configure_target() {
                            autogen \
                            exclude_graphdriver_devicemapper \
                            exclude_graphdriver_aufs \
-                           exclude_graphdriver_btrfs"
+                           exclude_graphdriver_btrfs \
+                           journald"
 
   case $TARGET_ARCH in
     x86_64)
@@ -75,7 +76,9 @@ configure_target() {
   export PATH=$PATH:$GOROOT/bin
 
   mkdir -p $ROOT/$PKG_BUILD/.gopath
-  mv $ROOT/$PKG_BUILD/vendor $ROOT/$PKG_BUILD/.gopath/src
+  if [ -d $ROOT/$PKG_BUILD/vendor ]; then
+    mv $ROOT/$PKG_BUILD/vendor $ROOT/$PKG_BUILD/.gopath/src
+  fi
   ln -fs $ROOT/$PKG_BUILD $ROOT/$PKG_BUILD/.gopath/src/github.com/docker/docker
 
   # used for docker version

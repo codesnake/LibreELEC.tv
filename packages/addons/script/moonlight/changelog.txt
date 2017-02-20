@@ -1,3 +1,6 @@
+7.0.105
+- update moonlight-embedded to support GFE 3.2
+
 7.0.104
 - update moonlight-common-c to support GFE 3.2
 
