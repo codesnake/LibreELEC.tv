@@ -1,44 +1,34 @@
-From 8a21c1acfe698b87ee1cc3bca698c7240baea461 Mon Sep 17 00:00:00 2001
+From 25593b25aa2b50b8019474f8b57c788c841faa72 Mon Sep 17 00:00:00 2001
 From: Alex Deryskyba <alex@codesnake.com>
 Date: Thu, 4 May 2017 12:49:09 +0200
 Subject: [PATCH] aml: fix bookmark thumbnails creation when playing a video
  with amcodec
 
 ---
- .../VideoPlayer/VideoRenderers/RenderCapture.cpp   |    3 ++
- .../VideoPlayer/VideoRenderers/RenderCapture.h     |    4 ++
+ .../VideoRenderers/HwDecRender/RendererAML.cpp     |    2 +
  xbmc/utils/ScreenshotAML.cpp                       |   43 +++++++++++---------
- 3 files changed, 30 insertions(+), 20 deletions(-)
+ 2 files changed, 25 insertions(+), 20 deletions(-)
 
-diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.cpp b/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.cpp
-index 9bf0310..ca8b416 100644
---- a/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.cpp
-+++ b/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.cpp
-@@ -252,6 +252,9 @@ void CRenderCaptureGL::EndRender()
-   else
- #endif
-   {
-+#ifdef HAS_LIBAMCODEC
-+    CScreenshotAML::CaptureVideoFrame(m_pixels, m_width, m_height);
-+#endif
-     SetState(CAPTURESTATE_DONE);
-   }
- }
-diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.h b/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.h
-index 9f9565f..0a77128 100644
---- a/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.h
-+++ b/xbmc/cores/VideoPlayer/VideoRenderers/RenderCapture.h
-@@ -167,6 +167,10 @@ class CRenderCapture : public CRenderCaptureDispmanX
- #elif defined(HAS_GL) || defined(HAS_GLES)
- #include "system_gl.h"
- 
-+#ifdef HAS_LIBAMCODEC
+diff --git a/xbmc/cores/VideoPlayer/VideoRenderers/HwDecRender/RendererAML.cpp b/xbmc/cores/VideoPlayer/VideoRenderers/HwDecRender/RendererAML.cpp
+index 292f07b..4b6e04f 100644
+--- a/xbmc/cores/VideoPlayer/VideoRenderers/HwDecRender/RendererAML.cpp
++++ b/xbmc/cores/VideoPlayer/VideoRenderers/HwDecRender/RendererAML.cpp
+@@ -25,6 +25,7 @@
+ #include "cores/VideoPlayer/DVDCodecs/Video/AMLCodec.h"
+ #include "utils/log.h"
+ #include "utils/SysfsUtils.h"
 +#include "utils/ScreenshotAML.h"
-+#endif // HAS_LIBAMCODEC
-+
- class CRenderCaptureGL : public CRenderCaptureBase
+ #include "settings/MediaSettings.h"
+ #include "windowing/WindowingFactory.h"
+ #include "cores/VideoPlayer/VideoRenderers/RenderCapture.h"
+@@ -77,6 +78,7 @@ bool CRendererAML::RenderCapture(CRenderCapture* capture)
  {
-   public:
+   capture->BeginRender();
+   capture->EndRender();
++  CScreenshotAML::CaptureVideoFrame((unsigned char *)capture->GetRenderBuffer(), capture->GetWidth(), capture->GetHeight());
+   return true;
+ }
+ 
 diff --git a/xbmc/utils/ScreenshotAML.cpp b/xbmc/utils/ScreenshotAML.cpp
 index 3e73437..e0d1d22 100644
 --- a/xbmc/utils/ScreenshotAML.cpp
