@@ -1,0 +1,26 @@
+From 5a4d56941b3d1f0ca5a8e57e9532bc2bb74bb325 Mon Sep 17 00:00:00 2001
+From: Alex Deryskyba <alex@codesnake.com>
+Date: Thu, 8 Jun 2017 15:03:04 +0200
+Subject: [PATCH] v4l2: select CONFIG_RATIONAL when CONFIG_VIDEO_V4L2 is
+ selected
+
+media_build requires rational_best_approximation() for v4l2-dv-timings module.
+---
+ drivers/media/v4l2-core/Kconfig |    1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/media/v4l2-core/Kconfig b/drivers/media/v4l2-core/Kconfig
+index 875f327..7b8e1c3 100755
+--- a/drivers/media/v4l2-core/Kconfig
++++ b/drivers/media/v4l2-core/Kconfig
+@@ -6,6 +6,7 @@
+ config VIDEO_V4L2
+ 	tristate
+ 	depends on (I2C || I2C=n) && VIDEO_DEV
++	select RATIONAL
+ 	default (I2C || I2C=n) && VIDEO_DEV
+ 
+ config VIDEO_ADV_DEBUG
+-- 
+1.7.10.4
+

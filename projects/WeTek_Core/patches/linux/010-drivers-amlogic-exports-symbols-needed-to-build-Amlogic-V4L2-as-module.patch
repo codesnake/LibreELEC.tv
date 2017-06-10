@@ -1,0 +1,41 @@
+From 475704fb32b35eed94f995f3124b926c4fc91674 Mon Sep 17 00:00:00 2001
+From: kszaq <kszaquitto@gmail.com>
+Date: Thu, 27 Oct 2016 23:07:58 +0200
+Subject: [PATCH] drivers/amlogic: exports symbols needed to build Amlogic V4L2
+ as module
+
+---
+ drivers/amlogic/amports/video.c   | 1 +
+ drivers/amlogic/ppmgr/ppmgr_drv.c | 1 +
+ 2 files changed, 2 insertions(+)
+ mode change 100755 => 100644 drivers/amlogic/amports/video.c
+ mode change 100755 => 100644 drivers/amlogic/ppmgr/ppmgr_drv.c
+
+diff --git a/drivers/amlogic/amports/video.c b/drivers/amlogic/amports/video.c
+old mode 100755
+new mode 100644
+index ec7e2feb572..bb7ff937077
+--- a/drivers/amlogic/amports/video.c
++++ b/drivers/amlogic/amports/video.c
+@@ -93,6 +93,7 @@ static int debugflags=0;
+ static int output_fps = 0;
+ static u32 omx_pts = 0;
+ bool omx_secret_mode = false;
++EXPORT_SYMBOL(omx_secret_mode);
+ #define DEBUG_FLAG_FFPLAY	(1<<0)
+ #define DEBUG_FLAG_CALC_PTS_INC	(1<<1)
+ 
+diff --git a/drivers/amlogic/ppmgr/ppmgr_drv.c b/drivers/amlogic/ppmgr/ppmgr_drv.c
+old mode 100755
+new mode 100644
+index 57d77ac4b96..47b0e550310
+--- a/drivers/amlogic/ppmgr/ppmgr_drv.c
++++ b/drivers/amlogic/ppmgr/ppmgr_drv.c
+@@ -978,6 +978,7 @@ void get_ppmgr_buf_info(char** start,unsigned int* size) {
+     *start=ppmgr_device.buffer_start;
+     *size=ppmgr_device.buffer_size;
+ }
++EXPORT_SYMBOL(get_ppmgr_buf_info);
+ 
+ static int ppmgr_open(struct inode *inode, struct file *file)
+ {
