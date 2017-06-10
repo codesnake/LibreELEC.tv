@@ -1,7 +1,7 @@
 diff -Naur a/backports/backports.txt b/backports/backports.txt
 --- a/backports/backports.txt	2017-01-23 18:14:24.000000000 +0100
-+++ b/backports/backports.txt	2017-04-26 20:27:31.873905122 +0200
-@@ -25,6 +25,20 @@
++++ b/backports/backports.txt	2017-05-19 16:10:26.736525418 +0200
+@@ -25,6 +25,21 @@
  add pr_fmt.patch
  add debug.patch
  add drx39xxj.patch
@@ -19,6 +19,7 @@ diff -Naur a/backports/backports.txt b/backports/backports.txt
 +add linux-250-meson-ir.patch
 +add linux-251-videobuf-resource.patch
 +add linux-252-amlogic-video-dev.patch
++add linux-253-wetek-dvb.patch
  
  [4.8.255]
  add v4.8_user_pages_flag.patch
