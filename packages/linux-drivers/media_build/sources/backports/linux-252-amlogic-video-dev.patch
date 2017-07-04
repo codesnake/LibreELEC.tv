@@ -91,10 +91,10 @@ index 0000000..4733d5c
 +obj-$(CONFIG_V4L_AMLOGIC_VIDEO2) += amlvideo2dri.o
 diff --git a/drivers/media/amlogic/video_dev/amlvideo-310.c b/drivers/media/amlogic/video_dev/amlvideo-310.c
 new file mode 100644
-index 0000000..a7884c7
+index 0000000..b6a5292
 --- /dev/null
 +++ b/drivers/media/amlogic/video_dev/amlvideo-310.c
-@@ -0,0 +1,1110 @@
+@@ -0,0 +1,1109 @@
 +/*
 + * pass a frame of amlogic video codec device  to user in style of v4l2
 + *
@@ -700,7 +700,6 @@ index 0000000..a7884c7
 +static int freerun_dqbuf(struct v4l2_buffer *p) {
 +    int ret = 0;
 +    int omx_ready = 0;
-+    printk("codesnake: dqbuf\n");
 +    if (omx_secret_mode == true) {
 +        omx_ready = vfq_level(&q_ready);
 +        if (omx_ready + vfq_level(&q_omx)> AMLVIDEO_POOL_SIZE-1) {
