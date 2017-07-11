@@ -10401,7 +10401,7 @@ index 0000000..ee4f9fb
 +#endif /* __MXL603_H__ */
 diff --git a/drivers/media/amlogic/dvb_tv/nimdetect.c b/drivers/media/amlogic/dvb_tv/nimdetect.c
 new file mode 100644
-index 0000000..5d9ef04
+index 0000000..073ddb6
 --- /dev/null
 +++ b/drivers/media/amlogic/dvb_tv/nimdetect.c
 @@ -0,0 +1,584 @@
@@ -10850,8 +10850,8 @@ index 0000000..5d9ef04
 +		reset_demod();
 +		dev_info(&pdev->dev, "Checking for Panasonic MN88436 ATSC demod ...\n");	
 +			
-+		//weteknims.fe[i] =  mn88436_attach(weteknims.i2c[i], 0);				
-+			
++		weteknims.fe[i] =  mn88436_attach(weteknims.i2c[i], 0);
++
 +		if (weteknims.fe[i] != NULL) {			
 +												
 +			if (mxl603_attach(weteknims.fe[i], weteknims.i2c[i], 0x60, &mxl603cfg_atsc) == NULL) {
