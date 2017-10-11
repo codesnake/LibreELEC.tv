@@ -1,0 +1,13 @@
+diff --git a/drivers/amlogic/input/remote/am_remote.c b/drivers/amlogic/input/remote/am_remote.c
+index c824efb..cb6c7fc 100755
+--- a/drivers/amlogic/input/remote/am_remote.c
++++ b/drivers/amlogic/input/remote/am_remote.c
+@@ -352,7 +352,7 @@ static inline int remote_hw_reprot_key(struct remote *remote_data)
+ 	key_hold = -1;
+ 	if (scan_code) {	//key first press
+ 		last_custom_code = scan_code & 0xffff;
+-		if (remote_data->custom_code != last_custom_code) {
++		if (remote_data->custom_code != last_custom_code && last_custom_code != 0x5f5e) {
+ 			input_dbg("Wrong custom code is 0x%08x\n", scan_code);
+ 			return -1;
+ 		}
