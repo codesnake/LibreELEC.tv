@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2016 Team LibreELEC
+#      Copyright (C) 2017-present Team LibreELEC
 #
 #  LibreELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -16,13 +16,24 @@
 #  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="libconfuse"
-PKG_VERSION="3.2"
-PKG_LICENSE="https://github.com/martinh/libconfuse/blob/master/LICENSE"
-PKG_SITE="https://github.com/martinh/libconfuse"
-PKG_URL="https://github.com/martinh/libconfuse/archive/v$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_LONGDESC="Small configuration file parser library for C"
-PKG_AUTORECONF="yes"
+import alsaaudio as alsa
+import xbmcaddon
+import xbmcgui
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-static --disable-shared"
+
+dialog  = xbmcgui.Dialog()
+strings  = xbmcaddon.Addon().getLocalizedString
+while True:
+   pcms = alsa.pcms()[1:]
+   if len(pcms) == 0:
+      dialog.ok(xbmcaddon.Addon().getAddonInfo('name'), strings(30210))
+      break
+   pcmx = dialog.select(strings(30112), pcms)
+   if pcmx == -1:
+      break
+   pcm = pcms[pcmx]
+   xbmcaddon.Addon().setSetting('ls_o', pcm)
+   break
+del dialog
+
+
