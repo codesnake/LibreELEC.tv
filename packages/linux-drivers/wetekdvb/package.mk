@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="wetekdvb"
-PKG_VERSION="20170608"
+PKG_VERSION="20171119-mb"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="nonfree"
 PKG_SITE="http://www.wetek.com/"
